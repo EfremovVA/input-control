@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Регистрация</title>
+    </head>
+    <body>
+        <div class="frame">
+            <h1 class="frame-title">Задать вопрос</h1>
+            
+            <form class="form" id="person">
+                <div class="form-group">
+                    <input class="input" type="text" name="name" placeholder="Фамилия Имя Отчество *" pattern="^[А-Яа-яЁё\s\-]+$" required>
+                </div>
+
+                <div class="form-group">
+                    <input class="input" type="tel" name="phone" placeholder="Телефон *" pattern="^[ 0-9 \s\+]+$" required>
+                </div>
+
+                <div class="form-group">
+                    <input class="input" type="email" name="email" placeholder="Email" pattern="^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$">
+                </div>
+               
+
+                <button class="btn" id="btn" type="submit" onclick="btnClick()" >ОТПРАВИТЬ ЗАПРОС</button>
+
+
+            
+            </form>
+
+            
+            <script>
+                let formData = new FormData(document.forms.person);                 
+                let xhr = new XMLHttpRequest();
+
+                xhr.open("POST", "https://60376bfd5435040017722533.mockapi.io/form",true);
+                // xhr.open("POST", "https://60376bfd5435040017722533.mockapi.io/formRej",true)
+
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState == 4) {                  
+                        if (xhr.status == 201) { 
+                    } else {                                
+                        alert("Отправки запроса не произошла"+"\n"+"Ответ сервера - " +xhr.status+ " : "+xhr.statusText);
+                        }
+                    }              
+                };
+                xhr.send(FormData);
+             </script>
+
+
+        </div>
+
+    </body>
+</html>
